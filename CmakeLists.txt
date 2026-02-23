@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Threads REQUIRED)
+find_package(OpenSSL REQUIRED) 
 
 add_subdirectory(extern/CLI11)
 
@@ -22,12 +23,17 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     include
     src
     extern/CLI11/include
+    extern/tomlplusplus/include
 )
+
+target_compile_definitions(${PROJECT_NAME} PRIVATE TOML_HEADER_ONLY=1)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     datachannel 
     CLI11::CLI11
     Threads::Threads
+    OpenSSL::Crypto
+    OpenSSL::SSL
 )
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
