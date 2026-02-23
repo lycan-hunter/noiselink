@@ -1,7 +1,5 @@
-#include <fstream>
 #include <string>
 #include <vector>
-#include <toml++/toml.hpp>
 #include <cstdint>
 #include <noiselink/core/turn_server.hpp>
 #include <filesystem>
@@ -55,11 +53,12 @@ class Peer {
   std::unique_ptr<PeerProfile> profile = nullptr;
   void load_profile(const fs::path &profile_path);
   void create_profile_file();
-  bool is_connected()const{return is_connected;};
+  bool is_connected()const{return _is_connected;};
 
  private:
+  fs::path _profile_path;
   void parse_loaded_profile();
-  bool is_connected = false;
+  bool _is_connected = false;
   
 };
 

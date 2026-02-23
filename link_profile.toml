@@ -1,0 +1,24 @@
+# Noiselink Connection Profile v1.0
+[remote_peer]
+peer_static_pk = "base64_of_own_public_key"
+peer_virtual_ip = "10.9.0.1"
+
+[network]
+signaling_server = "wss://signal.example.net:8000"
+stun_servers = [
+    "stun:stun.l.google.com:19302",
+    "stun:stun1.l.google.com:19305"
+]
+
+[[network.turn_servers]]
+url = "turn:relay.example.net:3478"
+username = "NoiseLink-User"
+
+[steganography]
+mode = "lsb_audio"
+enabled = true
+noise_density = 0.85 
+
+[system]
+mtu = 500
+allow_global_traffic = falseя

@@ -1,0 +1,9 @@
+[identity]
+own_node_name = "Home-PC"
+own_static_pk = "base64_of_own_public_key"
+own_static_sk = "base64_of_own_secret_key"
+
+[system]
+interface_name = "noisel0"
+own_virtual_ip = "10.9.0.1"
+mtu = 500
