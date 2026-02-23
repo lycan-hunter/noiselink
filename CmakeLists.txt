@@ -8,6 +8,7 @@ find_package(Threads REQUIRED)
 find_package(OpenSSL REQUIRED) 
 
 add_subdirectory(extern/CLI11)
+add_subdirectory(extern/spdlog)
 
 set(NO_TESTS ON CACHE BOOL "" FORCE)
 set(NO_EXAMPLES ON CACHE BOOL "" FORCE)
@@ -21,8 +22,6 @@ add_executable(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC 
     include
-    src
-    extern/CLI11/include
     extern/tomlplusplus/include
 )
 
@@ -31,11 +30,12 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE TOML_HEADER_ONLY=1)
 target_link_libraries(${PROJECT_NAME} PRIVATE 
     datachannel 
     CLI11::CLI11
+    spdlog::spdlog_header_only
     Threads::Threads
     OpenSSL::Crypto
     OpenSSL::SSL
 )
 
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|AppleClang")
     target_compile_options(${PROJECT_NAME} PRIVATE -Wall -Wextra -Wpedantic)
 endif()
